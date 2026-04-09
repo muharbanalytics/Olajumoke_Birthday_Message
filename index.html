@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Happy Birthday Ewaola Teminikan</title>
+  <title>Happy Birthday Ya Aayni Teminikan</title>
   <style>
     body {
       margin: 0;
@@ -49,16 +49,25 @@
       to { text-shadow: 0 0 30px #ff66b2; }
     }
 
-    p {
+    #message {
       font-size: 1.2em;
       color: #fff;
       max-width: 600px;
       margin-top: 15px;
-      animation: fadeIn 4s ease forwards;
+      text-shadow: 0 0 10px #ff66b2;
+    }
+
+    #signoff {
+      margin-top: 40px;
+      font-size: 1.3em;
+      color: #fff;
+      font-style: italic;
+      text-shadow: 0 0 15px #ff3399;
+      animation: fadeInSignoff 5s ease forwards;
       opacity: 0;
     }
 
-    @keyframes fadeIn {
+    @keyframes fadeInSignoff {
       to { opacity: 1; }
     }
 
@@ -101,14 +110,21 @@
 </head>
 <body>
   <div class="container">
-    <img src="her-photo.jpg" alt="Her Picture">
-    <h1>Happy Birthday My Love 💖</h1>
-    <p>You make my world brighter every day. Here’s to more laughter, adventures, and endless love together.</p>
+    <img src="olajumoke.jpg" alt="Ya Aayni">
+    <h1>Happy Birthday Olajumoke, I wish you a prosperous long life in good health and wealth💖</h1>
+    <p id="message"></p>
+    <p id="signoff">— With all my love, Abiodun 💕</p>
   </div>
   <div class="hearts"></div>
 
+  <!-- Background music -->
+  <audio autoplay loop>
+    <source src="romantic-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
   <script>
-    // Generate floating hearts
+    // Floating hearts
     function createHeart() {
       const heart = document.createElement('div');
       heart.className = 'heart';
@@ -117,6 +133,23 @@
       setTimeout(() => heart.remove(), 6000);
     }
     setInterval(createHeart, 500);
+
+    // Typing effect
+    const text = "You make my world brighter every day. Here’s to more laughter, adventures, and endless love together.";
+    let i = 0;
+    function typeWriter() {
+      if (i < text.length) {
+        document.getElementById("message").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 80);
+      } else {
+        // Show signoff after typing finishes
+        document.getElementById("signoff").style.opacity = 1;
+      }
+    }
+    window.onload = () => {
+      setTimeout(typeWriter, 3000);
+    };
   </script>
 </body>
 </html>
