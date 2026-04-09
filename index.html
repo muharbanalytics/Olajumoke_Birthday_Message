@@ -7,57 +7,54 @@
 body {
 margin: 0;
 padding: 0;
-/* Initial color background */
 background: linear-gradient(to right, #ff9a9e, #fad0c4);
 font-family: 'Segoe UI', sans-serif;
 text-align: center;
-overflow: hidden;
-height: 100vh;
-width: 100vw;
+overflow-x: hidden;
+min-height: 100vh;
 }
 
-/* This layer holds the background image and fades in */
 body::before {
 content: "";
-position: absolute;
+position: fixed;
 top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-/* Replace your-image.jpg with your actual file name */
 background-image: url('background.jpg');
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
-opacity: 0;
-animation: fadeInBackground 3s ease forwards;
-z-index: 0;
-}
-
-@keyframes fadeInBackground {
-0% { opacity: 0; }
-100% { opacity: 1; }
+opacity: 1;
+z-index: -1;
 }
 
 .container {
 position: relative;
-height: 100vh;
+min-height: 100vh;
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 z-index: 2;
-/* Adds a slight dark tint so text stays readable over the image */
 background: rgba(0, 0, 0, 0.2);
+padding: 40px 20px;
+box-sizing: border-box;
 }
 
 img.profile-pic {
-width: 400px;
-height: 400px;
+/* Increased size to 450px */
+width: 450px;
+height: 450px;
 border-radius: 50%;
+object-fit: cover;
+border: 8px solid rgba(255, 255, 255, 0.3);
 box-shadow: 0 0 50px rgba(255, 0, 100, 0.8);
 animation: zoomIn 3s ease forwards;
 opacity: 0;
+/* Ensures text stays below the image */
+display: block;
+margin-bottom: 30px;
 }
 
 @keyframes zoomIn {
@@ -66,11 +63,11 @@ opacity: 0;
 }
 
 h1 {
-font-size: 2.2em;
+font-size: 2.5em;
 color: white;
 text-shadow: 0 0 20px #ff0066;
-margin-top: 20px;
-padding: 0 20px;
+margin: 10px 0;
+max-width: 800px;
 animation: glow 2s infinite alternate;
 }
 
@@ -80,17 +77,18 @@ to { text-shadow: 0 0 30px #ff66b2; }
 }
 
 #message {
-font-size: 1.2em;
+font-size: 1.4em;
 color: #fff;
-max-width: 600px;
-margin-top: 15px;
-height: 3em;
+max-width: 700px;
+margin: 20px auto;
+min-height: 3em;
 text-shadow: 0 0 10px #ff66b2;
+line-height: 1.5;
 }
 
 #signoff {
 margin-top: 20px;
-font-size: 1.3em;
+font-size: 1.5em;
 color: #fff;
 font-style: italic;
 text-shadow: 0 0 15px #ff3399;
@@ -99,30 +97,30 @@ transition: opacity 2s;
 }
 
 .music-btn {
-margin-top: 30px;
-padding: 12px 25px;
-font-size: 1em;
+margin-top: 40px;
+padding: 15px 35px;
+font-size: 1.1em;
 background-color: #ff0066;
 color: white;
 border: none;
-border-radius: 25px;
+border-radius: 30px;
 cursor: pointer;
-box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 z-index: 10;
+transition: transform 0.2s;
 }
 
-.music-btn:hover {
-background-color: #ff3399;
+.music-btn:active {
+transform: scale(0.95);
 }
 
 .hearts {
-position: absolute;
+position: fixed;
 width: 100%;
 height: 100%;
 top: 0;
 left: 0;
 pointer-events: none;
-overflow: hidden;
 z-index: 1;
 }
 
@@ -151,6 +149,14 @@ border-radius: 50%;
 0% { transform: translateY(110vh) rotate(45deg); opacity: 1; }
 100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
 }
+
+@media (max-width: 600px) {
+img.profile-pic {
+width: 300px;
+height: 300px;
+}
+h1 { font-size: 1.8em; }
+}
 </style>
 </head>
 <body>
@@ -160,7 +166,6 @@ border-radius: 50%;
 <h1>Happy Birthday Olajumoke, I wish you a prosperous long life in good health and wealth</h1>
 <p id="message"></p>
 <p id="signoff">With all my love, Abiodun</p>
-
 <button class="music-btn" onclick="toggleMusic()">Play Music 🎶</button>
 </div>
 
@@ -179,7 +184,7 @@ heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
 document.querySelector('.hearts').appendChild(heart);
 setTimeout(() => heart.remove(), 6000);
 }
-setInterval(createHeart, 300);
+setInterval(createHeart, 400);
 
 const text = "You make my world brighter every day. Here’s to more laughter, adventures, and endless love together.. (MAESHA)";
 let i = 0;
