@@ -21,6 +21,7 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
+/* Replace your-background-image.jpg with your background file name */
 background-image: url('background.jpg');
 background-size: cover;
 background-position: center;
@@ -43,7 +44,6 @@ box-sizing: border-box;
 }
 
 img.profile-pic {
-/* Increased size to 450px */
 width: 450px;
 height: 450px;
 border-radius: 50%;
@@ -52,7 +52,6 @@ border: 8px solid rgba(255, 255, 255, 0.3);
 box-shadow: 0 0 50px rgba(255, 0, 100, 0.8);
 animation: zoomIn 3s ease forwards;
 opacity: 0;
-/* Ensures text stays below the image */
 display: block;
 margin-bottom: 30px;
 }
@@ -107,11 +106,6 @@ border-radius: 30px;
 cursor: pointer;
 box-shadow: 0 4px 15px rgba(0,0,0,0.4);
 z-index: 10;
-transition: transform 0.2s;
-}
-
-.music-btn:active {
-transform: scale(0.95);
 }
 
 .hearts {
@@ -176,6 +170,32 @@ h1 { font-size: 1.8em; }
 </audio>
 
 <script>
+const music = document.getElementById('bgmusic');
+
+function startMusic() {
+music.play().then(() => {
+document.removeEventListener('click', startMusic);
+document.removeEventListener('touchstart', startMusic);
+document.querySelector('.music-btn').innerHTML = "Pause Music 🎵";
+}).catch(error => {
+console.log("Waiting for interaction...");
+});
+}
+
+document.addEventListener('click', startMusic);
+document.addEventListener('touchstart', startMusic);
+
+function toggleMusic() {
+const btn = document.querySelector('.music-btn');
+if (music.paused) {
+music.play();
+btn.innerHTML = "Pause Music 🎵";
+} else {
+music.pause();
+btn.innerHTML = "Play Music 🎶";
+}
+}
+
 function createHeart() {
 const heart = document.createElement('div');
 heart.className = 'heart';
@@ -195,18 +215,6 @@ i++;
 setTimeout(typeWriter, 80);
 } else {
 document.getElementById("signoff").style.opacity = 1;
-}
-}
-
-function toggleMusic() {
-const music = document.getElementById('bgmusic');
-const btn = document.querySelector('.music-btn');
-if (music.paused) {
-music.play();
-btn.innerHTML = "Pause Music 🎵";
-} else {
-music.pause();
-btn.innerHTML = "Play Music 🎶";
 }
 }
 
