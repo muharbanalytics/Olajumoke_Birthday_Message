@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,10 +7,36 @@
 body {
 margin: 0;
 padding: 0;
+/* Initial color background */
 background: linear-gradient(to right, #ff9a9e, #fad0c4);
 font-family: 'Segoe UI', sans-serif;
 text-align: center;
 overflow: hidden;
+height: 100vh;
+width: 100vw;
+}
+
+/* This layer holds the background image and fades in */
+body::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+/* Replace your-image.jpg with your actual file name */
+background-image: url('background.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+opacity: 0;
+animation: fadeInBackground 3s ease forwards;
+z-index: 0;
+}
+
+@keyframes fadeInBackground {
+0% { opacity: 0; }
+100% { opacity: 1; }
 }
 
 .container {
@@ -22,9 +47,11 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 z-index: 2;
+/* Adds a slight dark tint so text stays readable over the image */
+background: rgba(0, 0, 0, 0.2);
 }
 
-img {
+img.profile-pic {
 width: 250px;
 height: 250px;
 border-radius: 50%;
@@ -80,7 +107,7 @@ color: white;
 border: none;
 border-radius: 25px;
 cursor: pointer;
-box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 z-index: 10;
 }
 
@@ -121,22 +148,20 @@ border-radius: 50%;
 .heart::after { left: -10px; top: 0; }
 
 @keyframes float {
-0% { transform: translateY(100vh) rotate(45deg); opacity: 1; }
+0% { transform: translateY(110vh) rotate(45deg); opacity: 1; }
 100% { transform: translateY(-10vh) rotate(45deg); opacity: 0; }
 }
 </style>
-
 </head>
 <body>
 
 <div class="container">
-<img src="olajumoke.jpg" alt="Ya Aayni">
+<img src="olajumoke.jpg" alt="Ya Aayni" class="profile-pic">
 <h1>Happy Birthday Olajumoke, I wish you a prosperous long life in good health and wealth</h1>
 <p id="message"></p>
 <p id="signoff">With all my love, Abiodun</p>
 
 <button class="music-btn" onclick="toggleMusic()">Play Music 🎶</button>
-
 </div>
 
 <div class="hearts"></div>
@@ -184,6 +209,5 @@ window.onload = () => {
 setTimeout(typeWriter, 3000);
 };
 </script>
-
 </body>
 </html>
